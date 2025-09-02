@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { GlobalStyles, Container } from './styles/GlobalStyles';
+import { useQuiz } from './hooks/useQuiz';
+import QuizCard from './components/QuizCard';
+import wordData from './constants/word/day3.json';
 
 function App() {
+  const { quizState, selectAnswer, nextQuestion, resetQuiz } = useQuiz(wordData);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <Container>
+        <QuizCard
+          quizState={quizState}
+          onSelectAnswer={selectAnswer}
+          onNextQuestion={nextQuestion}
+          onResetQuiz={resetQuiz}
+        />
+      </Container>
+    </>
   );
 }
 
